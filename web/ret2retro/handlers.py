@@ -12,7 +12,7 @@ async def index(request):
 async def transform_image(request):
     multipart_data = await request.post()
     image_content = multipart_data['image'].file.read()
-    result = await process_image_async(image_content)
+    name, result = await process_image_async(image_content)
     return web.Response(body=result, status=200)
 
 

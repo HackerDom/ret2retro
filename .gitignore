@@ -1,4 +1,7 @@
-/docker-compose.yml
+# Docker
+docker-compose.yml
+
+# Python
 *.egg-info
 *.pyc
 /.pytest_cache/
@@ -6,3 +9,6 @@
 /.cache
 /htmlcov
 /.coverage
+
+# Project
+web/upload/
