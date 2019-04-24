@@ -22,7 +22,6 @@ def main():
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
     app = web.Application()
-    print(TEMPLATES_PATH)
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(TEMPLATES_PATH))
     app.add_routes([
         web.post('/', transform_image),

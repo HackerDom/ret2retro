@@ -1,0 +1,6 @@
+version: "3.5"
+services:
+  ret2retro-web:
+    image: ructf.ru/ret2retro-web:latest
+    environment:
+        - RET2RETRO_ENV=production

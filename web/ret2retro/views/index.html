@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="main-page">
+<section class="page-container">
+    <div class="ctf-page-logo"></div>
     <div class="form-container">
         <div class="form-container__inner">
             <form class="form-upload" action="/" method="POST" enctype="multipart/form-data">
@@ -14,7 +15,7 @@
                             </label>
                         </div>
                     </div>
-                    {% if errors.image %}
+                    {% if errors and errors.image %}
                     <div class="form-input-errors">
                         {% for error in errors.image %}
                         <div class="form-input-error" >{{ error }}</div>

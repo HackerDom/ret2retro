@@ -16,8 +16,17 @@ body {
     justify-content: center;
 }
 
-.form-container {
+.page-container {
     margin: 0 auto;
+}
+
+.ctf-page-logo {
+    height: 180px;
+    margin-bottom: 30px;
+    background-image: url("/static/images/logo.svg");
+}
+
+.form-container {
     width: 400px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 }
