@@ -4,17 +4,28 @@
 <section class="main-page">
     <div class="form-container">
         <div class="form-container__inner">
-            <form class="form-upload" action="/transform/" method="POST" enctype="multipart/form-data">
-                <div class="form-input-wrapper">
-                    <div class="form-input-dnd">
-                        <input type="file" name="image" id="input_file" class="form-input-file">
-                        <label for="input_file" class="form-input-file-dnd">
-                            Нажми или перемести файл
-                        </label>
+            <form class="form-upload" action="/" method="POST" enctype="multipart/form-data">
+                <div class="form-input-container">
+                    <div class="form-input-wrapper">
+                        <div class="form-input-dnd">
+                            <input type="file" name="image" id="input_file" class="form-input-file">
+                            <label for="input_file" class="form-input-file-dnd">
+                                Нажми или перемести файл
+                            </label>
+                        </div>
                     </div>
+                    {% if errors.image %}
+                    <div class="form-input-errors">
+                        {% for error in errors.image %}
+                        <div class="form-input-error" >{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="form-input-wrapper form-input-wrapper--end">
-                    <button type="submit" class="form-input-button">Узнать</button>
+                <div class="form-input-container">
+                    <div class="form-input-wrapper form-input-wrapper--end">
+                        <button type="submit" class="form-input-button">Узнать</button>
+                    </div>
                 </div>
             </form>
         </div>

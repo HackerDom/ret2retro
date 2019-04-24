@@ -25,7 +25,7 @@ def main():
     print(TEMPLATES_PATH)
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(TEMPLATES_PATH))
     app.add_routes([
-        web.post('/transform/', transform_image),
+        web.post('/', transform_image),
         web.get('/', index),
     ])
     if not IS_PRODUCTION:

@@ -44,7 +44,22 @@ body {
     flex-direction: column;
 }
 
-.form-input-wrapper:not(:last-child) {
+.form-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input-container .form-input-errors {
+    align-self: flex-end;
+}
+
+.form-input-error {
+    margin: 2px 0;
+    font-size: 12px;
+    color: red;
+}
+
+.form-input-container:not(:last-child) {
     margin-bottom: 20px;
 }
 
