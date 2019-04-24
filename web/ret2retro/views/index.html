@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>Main page</div>
+<section class="main-page">
+    <div class="form-container">
+        <div class="form-container-inner">
+            <form class="form-upload" action="/transform/" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" id="input_file">
+                <input type="submit" value="Загрузить" name="submit">
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock %}

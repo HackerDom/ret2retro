@@ -4,12 +4,12 @@ import argparse
 import asyncio
 import uvloop
 import jinja2
-from ret2retro.config import TEMPLATES_PATH
-
 import aiohttp_jinja2
+
 from aiohttp import web
 
-from ret2retro.handlers import index
+from ret2retro.config import TEMPLATES_PATH, STATIC_PATH, IS_PRODUCTION
+from ret2retro.handlers import index, transform_image, redirect_to_main
 
 CONSOLE_LOG_FORMAT = '%(asctime)-10s : %(levelname)-8s : %(message)s'
 
@@ -25,8 +25,12 @@ def main():
     print(TEMPLATES_PATH)
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(TEMPLATES_PATH))
     app.add_routes([
-        web.get('/', index)
+        web.post('/transform/', transform_image),
+        web.get('/', index),
+        web.get('/{path:.*}', redirect_to_main)
     ])
+    if not IS_PRODUCTION:
+        app.router.add_static('/static/', STATIC_PATH)
     setup_logger()
     web.run_app(app, host=args.host, port=args.port)
 
