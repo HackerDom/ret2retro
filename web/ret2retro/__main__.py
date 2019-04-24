@@ -27,10 +27,11 @@ def main():
     app.add_routes([
         web.post('/transform/', transform_image),
         web.get('/', index),
-        web.get('/{path:.*}', redirect_to_main)
     ])
     if not IS_PRODUCTION:
         app.router.add_static('/static/', STATIC_PATH)
+    else:
+        app.router.add_route('GET', '/{path:.*}', redirect_to_main)
     setup_logger()
     web.run_app(app, host=args.host, port=args.port)
 

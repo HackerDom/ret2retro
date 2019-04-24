@@ -3,10 +3,19 @@
 {% block content %}
 <section class="main-page">
     <div class="form-container">
-        <div class="form-container-inner">
+        <div class="form-container__inner">
             <form class="form-upload" action="/transform/" method="POST" enctype="multipart/form-data">
-                <input type="file" name="image" id="input_file">
-                <input type="submit" value="Загрузить" name="submit">
+                <div class="form-input-wrapper">
+                    <div class="form-input-dnd">
+                        <input type="file" name="image" id="input_file" class="form-input-file">
+                        <label for="input_file" class="form-input-file-dnd">
+                            Нажми или перемести файл
+                        </label>
+                    </div>
+                </div>
+                <div class="form-input-wrapper form-input-wrapper--end">
+                    <button type="submit" class="form-input-button">Узнать</button>
+                </div>
             </form>
         </div>
     </div>
