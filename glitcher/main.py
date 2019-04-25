@@ -10,6 +10,7 @@ from effects import TransformationList
 
 ImageType = Image.Image
 
+
 STATIC_TRANSFORM = [
     (effects.convert, {'mode': 'RGB'}),
     (effects.split_color_channels, {'offset': 10}),
@@ -26,9 +27,10 @@ def add_pictured_frame(im):
     back_color = (256, 256, 256)
     shift = min(im.size[0], im.size[1])//13
     length = 2*shift
-    width =  shift//8
+    width = shift//8
 
-    text =  "PLAY >"
+
+    text = "PLAY >"
     font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     location = (1.8*shift, 1.8*shift)
     d = ImageDraw.Draw(im)
@@ -36,7 +38,7 @@ def add_pictured_frame(im):
     d.rectangle((shift, shift, shift + width, shift + length), fill=back_color)
     d.text(location, text, font=font, fill=text_color)
 
-    text =  "03:13:37"
+    text = "03:13:37"
     font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size = font.getsize(text)
     location = (im.size[0] - 1.8*shift-text_size[0], 1.8*shift)
@@ -47,7 +49,7 @@ def add_pictured_frame(im):
 
     up = 1.5
     text1 = "#RUCTF"
-    text2 =  "#ret2retro"
+    text2 = "#ret2retro"
     font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size2 = font.getsize(text2)
     text_size1 = font.getsize(text1)
@@ -59,7 +61,7 @@ def add_pictured_frame(im):
     d.text(location2, text2, font=font, fill=text_color)
     d.text(location1, text1, font=font, fill=text_color)
 
-    text1 =  "YEKATERINBURG"
+    text1 = "YEKATERINBURG"
     text2 = "APR. 26-29 2019"
     font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size = font.getsize(text)
@@ -97,17 +99,24 @@ def apply_transformations(im: ImageType, funcs: TransformationList) -> ImageType
     return transformed
 
 
+def add_vio_filter(im):
+    size = im.size
+    img = Image.new('RGB', size, color=(100,50,220))
+    im = Image.blend(im, img, 0.2)
+    return im
+
+
 def glitch(im, score):
-    output = apply_transformations(im, STATIC_TRANSFORM)
-    output = add_pictured_frame(output)
-    output = add_text(output, score)
-    return output
+    im = add_vio_filter(im)
+    im = apply_transformations(im, STATIC_TRANSFORM)
+    im = add_pictured_frame(im)
+    im = add_text(im, score)
+    return im
 
 
 def glitch_bytes_io(img_bytes, score):
     im = Image.open(img_bytes)
     result = glitch(im, score)
-
     buffer = BytesIO()
     result.save(buffer, format='png')
     buffer.name = 'test.png'
