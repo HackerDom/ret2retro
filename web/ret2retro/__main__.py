@@ -25,7 +25,7 @@ def main():
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(TEMPLATES_PATH))
     app.add_routes([
         web.post('/', transform_image),
-        web.get('/{image_hash}.png', glitched_image),
+        web.get('/{image_hash:[\w\d]+}.png', glitched_image),
         web.get('/', index),
     ])
     if not IS_PRODUCTION:
