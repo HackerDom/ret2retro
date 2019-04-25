@@ -4,11 +4,12 @@ docker-compose.yml
 # Python
 *.egg-info
 *.pyc
-/.pytest_cache/
-/.eggs/
-/.cache
-/htmlcov
-/.coverage
+.pytest_cache/
+.eggs/
+.cache
+htmlcov
+.coverage
+.idea
 
 # Project
 web/upload/

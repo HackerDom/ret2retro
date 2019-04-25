@@ -1,4 +1,3 @@
-#! python3
 """Collection of pure functions for transforming Pillow Images."""
 import random
 import math

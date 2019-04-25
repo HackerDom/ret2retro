@@ -1,4 +1,4 @@
-Обрабоотка изображения:
+Обработка изображения:
 
 	main.glitch(im: ImageType, score: float) -> ImageType
 	

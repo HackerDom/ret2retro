@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='ret2retro',
@@ -6,7 +6,6 @@ setup(
     description='CTF ret2retro web',
     author='Arseny Lezin',
     author_email='arseny.lezin@gmail.com',
-    url='https://www.netangels.ru',
     install_requires=[
         'aiohttp-jinja2 == 1.1.0',
         'aiohttp == 3.4.4',
