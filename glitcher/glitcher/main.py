@@ -72,10 +72,10 @@ def add_pictured_frame(im):
     return im
 
 def add_text(im, num):
-    font_size = min(im.size[0], im.size[1])//10
+    font_size = min(im.size[0], im.size[1]) // 10
     text_color = (0, 0, 0)
     back_color = (256, 256, 256)
-    text =  "HACKERNESS: {0:.3f}".format(num)
+    text = f"HACKERNESS: {num:.3f}"
     font = ImageFont.truetype(SAMSON_FONT_PATH, size=font_size)
     text_size = font.getsize(text)
 
@@ -98,7 +98,8 @@ def apply_transformations(im: ImageType, funcs: TransformationList) -> ImageType
 
 def add_vio_filter(im):
     size = im.size
-    img = Image.new('RGB', size, color=(100,50,220))
+    import ipdb; ipdb.set_trace()
+    img = Image.new('RGB', size, color=(100, 50, 220))
     im = Image.blend(im, img, 0.2)
     return im
 

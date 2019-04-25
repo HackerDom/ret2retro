@@ -23,8 +23,10 @@ async def transform_image(request):
         })
         response.set_status(400)
         return response
-    name, result = await process_image_async(content)
-    return web.Response(body=result, status=200)
+    name, result, extension = await process_image_async(content)
+    return web.Response(body=result, content_type=f'image/{extension}', headers={
+        'Content-Disposition': f'attachment; filename="{name}.{extension}"'
+    }, status=200)
 
 
 async def redirect_to_main(request):
