@@ -6,3 +6,5 @@
 /.cache
 /htmlcov
 /.coverage
+glitcher/.idea/
+glitcher/Test/pict/*_glitch.png
