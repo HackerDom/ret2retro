@@ -9,6 +9,10 @@ body {
     background-size: cover;
 }
 
+.spring {
+    flex: 1;
+}
+
 .page__inner {
     height: 100%;
     display: flex;
