@@ -15,10 +15,10 @@ logger = logging.getLogger('ret2retro_bot')
 BOT_TOKEN = '856173416:AAG6qSSBxzSgZjAxd1g286y1I0rigW30ayI'
 
 PROXY_SETTINGS = {
-    'proxy_url': 'socks5://pofig.netangels.ru:8124',
+    'proxy_url': 'socks5://proxy.ruc.tf:52817',
     'urllib3_proxy_kwargs': {
-        'username': 'rkn',
-        'password': 'aufwidersehen',
+        'username': 'ructf2019',
+        'password': 'KeSrKxdVQuhBw1xTIZG2',
     }
 }
 

@@ -3,6 +3,10 @@ body {
     font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 
+h2 {
+    margin: 0;
+}
+
 .page {
     height: 100vh;
     background-image: url("/static/images/background.svg");
@@ -13,6 +17,10 @@ body {
     flex: 1;
 }
 
+.spring-top {
+    flex: 0;
+}
+
 .page__inner {
     height: 100%;
     display: flex;
@@ -20,18 +28,31 @@ body {
     justify-content: center;
 }
 
+.purple {
+    color: #CE5C9E;
+}
+
+.form-description {
+    margin: 5px 0;
+}
+
+.form-description:last-child {
+    margin-bottom: 10px;
+}
+
 .page-container {
     margin: 0 auto;
 }
 
 .ctf-page-logo {
+    margin: 0 auto 30px;
     height: 180px;
-    margin-bottom: 30px;
+    width: 400px;
     background-image: url("/static/images/logo.svg");
 }
 
 .form-container {
-    width: 400px;
+    width: 600px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -72,10 +93,6 @@ body {
     color: red;
 }
 
-.form-input-container:not(:last-child) {
-    margin-bottom: 20px;
-}
-
 .form-input-button {
     cursor: pointer;
     -webkit-border-radius: 3px;
@@ -101,6 +118,14 @@ body {
     background-color: #f1f7f9;
     border: 1px dashed #84898B;
     width: 100%;
+    -webkit-transition: background-color 0.3s ease-out 0.2s;
+    -moz-transition: background-color 0.3s ease-out 0.2s;
+    -o-transition: background-color 0.3s ease-out 0.2s;
+    transition: background-color 0.3s ease-out 0.2s;
+}
+
+.form-input-dnd--highlight {
+    background-color: #c2c8ca;
 }
 
 .form-input-file-dnd {
