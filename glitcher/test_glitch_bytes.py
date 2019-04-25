@@ -3,8 +3,10 @@ sys.path.append(os.path.dirname(__file__))
 from main import glitch_bytes_io
 from io import BytesIO
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\a.jpg"
-output_dir = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me"
+PATH = os.path.dirname(__file__)
+
+input_path = os.path.join(PATH, "pict", "a.jpg")
+output_dir = os.path.join(PATH, "pict")
 result = ""
 with open(input_path, "rb") as file:
     result = glitch_bytes_io(BytesIO(file.read()), 0.555)

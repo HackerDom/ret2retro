@@ -3,8 +3,10 @@ sys.path.append(os.path.dirname(__file__))
 from PIL import Image
 from main import glitch
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict\a.jpg"
-output_dir = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict"
+PATH = os.path.dirname(__file__)
+
+input_path = os.path.join(PATH, "pict", "a.jpg")
+output_dir = os.path.join(PATH, "pict")
 im = Image.open(input_path)
 output = glitch(im, 0.5555)
 basename = os.path.basename(input_path)
@@ -13,7 +15,7 @@ out_path = os.path.join(output_dir, outname)
 output.save(out_path)
 im.close()
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict\c.jpg"
+input_path = os.path.join(PATH, "pict", "c.jpg")
 im = Image.open(input_path)
 output = glitch(im, 0.5555)
 basename = os.path.basename(input_path)
@@ -22,7 +24,7 @@ out_path = os.path.join(output_dir, outname)
 output.save(out_path)
 im.close()
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict\d.jpg"
+input_path = os.path.join(PATH, "pict", "d.jpg")
 im = Image.open(input_path)
 output = glitch(im, 0.5555)
 basename = os.path.basename(input_path)
@@ -31,7 +33,7 @@ out_path = os.path.join(output_dir, outname)
 output.save(out_path)
 im.close()
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict\e.png"
+input_path = os.path.join(PATH, "pict", "e.png")
 im = Image.open(input_path)
 output = glitch(im, 0.5555)
 basename = os.path.basename(input_path)
@@ -40,7 +42,7 @@ out_path = os.path.join(output_dir, outname)
 output.save(out_path)
 im.close()
 
-input_path = r"C:\Users\elizu\ructf\glitcher\glitch_me\glitch_me\pict\f.png"
+input_path = os.path.join(PATH, "pict", "f.png")
 im = Image.open(input_path)
 output = glitch(im, 0.5555)
 basename = os.path.basename(input_path)

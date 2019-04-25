@@ -20,17 +20,6 @@ STATIC_TRANSFORM = [
 
 PATH = os.path.dirname(__file__)
 
-WHITE = Image.open(os.path.join(PATH, "white.png"))
-CTF = Image.open(os.path.join(PATH, "ctf.jpg")).convert("L")
-
-
-def add_frame(photo):
-    size = photo.size
-    white = WHITE.resize(size)
-    ctf = CTF.resize(size)
-    merged = Image.composite(white, photo, ctf)
-    return merged
-
 def add_pictured_frame(im):
     font_size = min(im.size[0], im.size[1])//20
     text_color = (256, 256, 256)
@@ -40,7 +29,7 @@ def add_pictured_frame(im):
     width =  shift//8
 
     text =  "PLAY >"
-    font = ImageFont.truetype(os.path.join(PATH, "fonts/Samson.ttf"), size=font_size)
+    font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     location = (1.8*shift, 1.8*shift)
     d = ImageDraw.Draw(im)
     d.rectangle((shift, shift, shift + length, shift + width), fill=back_color)
@@ -48,7 +37,7 @@ def add_pictured_frame(im):
     d.text(location, text, font=font, fill=text_color)
 
     text =  "03:13:37"
-    font = ImageFont.truetype(os.path.join(PATH, "fonts/Samson.ttf"), size=font_size)
+    font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size = font.getsize(text)
     location = (im.size[0] - 1.8*shift-text_size[0], 1.8*shift)
     d = ImageDraw.Draw(im)
@@ -59,7 +48,7 @@ def add_pictured_frame(im):
     up = 1.5
     text1 = "#RUCTF"
     text2 =  "#ret2retro"
-    font = ImageFont.truetype(os.path.join(PATH, "fonts/Samson.ttf"), size=font_size)
+    font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size2 = font.getsize(text2)
     text_size1 = font.getsize(text1)
     location1 = (im.size[0] - 1.8*shift-text_size1[0], im.size[1] - (up+0.8)*shift - 2*text_size1[1])
@@ -72,7 +61,7 @@ def add_pictured_frame(im):
 
     text1 =  "YEKATERINBURG"
     text2 = "APR. 26-29 2019"
-    font = ImageFont.truetype(os.path.join(PATH, "fonts/Samson.ttf"), size=font_size)
+    font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size = font.getsize(text)
     location2 = (1.8*shift, im.size[1] - (up+0.8)*shift-text_size[1])
     location1 = (1.8*shift, im.size[1] - (up+0.8)*shift-2*text_size[1])
@@ -88,7 +77,7 @@ def add_text(im, num):
     text_color = (0, 0, 0)
     back_color = (256, 256, 256)
     text =  "HACKERNESS: {0:.3f}".format(num)
-    font = ImageFont.truetype(os.path.join(PATH, "fonts/Samson.ttf"), size=font_size)
+    font = ImageFont.truetype(os.path.join(PATH, "Samson.ttf"), size=font_size)
     text_size = font.getsize(text)
 
     loc_x = (im.size[0]-text_size[0])//2
