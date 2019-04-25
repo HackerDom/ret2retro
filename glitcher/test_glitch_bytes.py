@@ -1,6 +1,5 @@
 import os, sys
 sys.path.append(os.path.dirname(__file__))
-from PIL import Image
 from main import glitch_bytes_io
 from io import BytesIO
 
