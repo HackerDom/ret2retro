@@ -1,0 +1,17 @@
+FROM python:3.7
+
+WORKDIR /opt/ret2retro_bot/
+COPY glitcher/setup.py /opt/glitcher/
+COPY nn/setup.py /opt/nn/
+COPY bot/setup.py /opt/ret2retro_bot/
+
+RUN pip install -e ../glitcher && \
+    pip install -e ../nn && \
+    pip install -e .
+
+COPY ./nn/nn /opt/nn/nn
+COPY ./glitcher/glitcher /opt/glitcher/glitcher
+
+COPY ./bot/ret2retro_bot /opt/ret2retro_bot/ret2retro_bot
+
+CMD ["python", "-m", "ret2retro_bot"]
