@@ -9,7 +9,7 @@ import aiohttp_jinja2
 from aiohttp import web
 
 from ret2retro.config import TEMPLATES_PATH, STATIC_PATH, IS_PRODUCTION
-from ret2retro.handlers import index, transform_image, redirect_to_main
+from ret2retro.handlers import index, transform_image, redirect_to_main, glitched_image
 
 CONSOLE_LOG_FORMAT = '%(asctime)-10s : %(levelname)-8s : %(message)s'
 
@@ -25,6 +25,7 @@ def main():
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(TEMPLATES_PATH))
     app.add_routes([
         web.post('/', transform_image),
+        web.get('/{image_hash}.png', glitched_image),
         web.get('/', index),
     ])
     if not IS_PRODUCTION:
