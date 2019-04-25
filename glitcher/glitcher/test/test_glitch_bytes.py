@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
-from io import BytesIO
-
 from glitcher.main import glitch_bytes_io
+from io import BytesIO
 
 PATH = os.path.dirname(__file__)
 

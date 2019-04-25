@@ -1,4 +1,6 @@
 import os
+import numpy as np
+
 import glitcher.effects
 
 from io import BytesIO
@@ -10,7 +12,7 @@ ImageType = Image.Image
 
 STATIC_TRANSFORM = [
     (glitcher.effects.convert, {'mode': 'RGB'}),
-    (glitcher.effects.split_color_channels, {'offset': 10}),
+    (glitcher.effects.split_color_channels, {'offset': 8}),
     (glitcher.effects.sharpen, {'factor': 5.0}),
     (glitcher.effects.add_transparent_pixel, {}),
     (glitcher.effects.shift_corruption, {"offset_mag" : 8, "coverage" : 0.2, "width" : 8})
@@ -98,11 +100,46 @@ def apply_transformations(im: ImageType, funcs: TransformationList) -> ImageType
 
 def add_vio_filter(im):
     size = im.size
-    import ipdb; ipdb.set_trace()
-    img = Image.new('RGB', size, color=(100, 50, 220))
-    im = Image.blend(im, img, 0.2)
-    return im
+    vio = Image.new('RGBA', size, color=(100,50,220))
+    im = im.convert("RGBA")
 
+    back = np.array(im)  # Inputs to blend_modes need to be numpy arrays.
+    back_float = back.astype(float)  # Inputs to blend_modes need to be floats.
+
+    fore = np.array(vio)  # Inputs to blend_modes need to be numpy arrays.
+    fore_float = fore.astype(float)  # Inputs to blend_modes need to be floats.
+
+    # Blend images
+    opacity = 0.6  # The opacity of the foreground that is blended onto the background is 70 %.
+    blended_img_float = soft_light(back_float, fore_float, opacity)
+
+    # Convert blended image back into PIL image
+    blended_img = np.uint8(blended_img_float)  # Image needs to be converted back to uint8 type for PIL handling.
+    result = Image.fromarray(blended_img)
+    return result
+
+
+def soft_light(img_in, img_layer, opacity):
+    img_in /= 255.0
+    img_layer /= 255.0
+
+    ratio = _compose_alpha(img_in, img_layer, opacity)
+    comp = (1.0 - img_in[:, :, :3]) * img_in[:, :, :3] * img_layer[:, :, :3] \
+           + img_in[:, :, :3] * (1.0 - (1.0 - img_in[:, :, :3]) * (1.0 - img_layer[:, :, :3]))
+
+    ratio_rs = np.reshape(np.repeat(ratio, 3), [comp.shape[0], comp.shape[1], comp.shape[2]])
+    img_out = comp * ratio_rs + img_in[:, :, :3] * (1.0 - ratio_rs)
+    img_out = np.nan_to_num(np.dstack((img_out, img_in[:, :, 3])))  # add alpha channel and replace nans
+    return img_out * 255.0
+
+
+def _compose_alpha(img_in, img_layer, opacity):
+    comp_alpha = np.minimum(img_in[:, :, 3], img_layer[:, :, 3]) * opacity
+    new_alpha = img_in[:, :, 3] + (1.0 - img_in[:, :, 3]) * comp_alpha
+    np.seterr(divide='ignore', invalid='ignore')
+    ratio = comp_alpha / new_alpha
+    ratio[ratio == np.NAN] = 0.0
+    return ratio
 
 def glitch(im, score):
     im = add_vio_filter(im)
