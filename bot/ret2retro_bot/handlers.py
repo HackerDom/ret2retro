@@ -23,7 +23,7 @@ def process_image(data):
 
 
 def start(bot, update):
-    logger.info(f'User start {update.message.from_user} conversetion')
+    logger.info(f'User start {update.message.from_user} conversation')
     update.message.reply_text(f'Hi {update.message.from_user.first_name}, send your image and check your hackerness!')
 
 

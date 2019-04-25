@@ -8,12 +8,12 @@ from io import BytesIO
 
 from functools import partial
 from asyncio import get_event_loop
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 from ret2retro.storages.fs_storage import FsStorage
-from ret2retro.config import UPLOAD_PATH, IS_PRODUCTION
+from ret2retro.config import UPLOAD_PATH, IS_PRODUCTION, WORKER_COUNT
 
-process_pool_executor = ProcessPoolExecutor()
+pool_executor = ThreadPoolExecutor(max_workers=WORKER_COUNT)
 graph = tf.get_default_graph()
 classifier = ImageClassifier()
 
@@ -35,12 +35,11 @@ def process_image(data):
     extension = 'png'
     return filename, transformed_data, extension
 
-
 async def process_image_async(data):
     loop = get_event_loop()
     if IS_PRODUCTION:
         name, transformed_image, extension = await loop.run_in_executor(
-            process_pool_executor,
+            pool_executor,
             partial(process_image, data)
         )
     else:
