@@ -7,6 +7,8 @@ setup(
     author='Arseny Lezin',
     author_email='arseny.lezin@gmail.com',
     install_requires=[
+        'glitcher == 0.1',
+        'ructf_nn == 0.1',
         'aiohttp-jinja2 == 1.1.0',
         'aiohttp == 3.4.4',
         'pyyaml == 3.13',

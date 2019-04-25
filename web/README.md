@@ -3,6 +3,8 @@
 В виртуальном окружении устанавливаем в корне проекта выполняем
 
 ```
+pip install -e ../glitcher/
+pip install -e ../nn/
 pip install -e .
 ```
 

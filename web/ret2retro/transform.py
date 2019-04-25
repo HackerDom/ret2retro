@@ -1,6 +1,8 @@
 import hashlib
+import tensorflow as tf
 
 from glitcher.main import glitch_bytes_io
+from nn.nn import ImageClassifier
 
 from io import BytesIO
 
@@ -12,9 +14,12 @@ from ret2retro.storages.fs_storage import FsStorage
 from ret2retro.config import UPLOAD_PATH, IS_PRODUCTION
 
 process_pool_executor = ProcessPoolExecutor()
+graph = tf.get_default_graph()
+classifier = ImageClassifier()
 
 
 def process_image(data):
+    global graph
     storage = FsStorage(UPLOAD_PATH)
     md5 = hashlib.md5()
     md5.update(data)
@@ -22,8 +27,10 @@ def process_image(data):
     filename = f'{name}.png'
     transformed_data = storage.get_resource(filename)
     if not transformed_data:
+        with graph.as_default():
+            score = classifier.score(data)
         buffer = BytesIO(data)
-        transformed_data = glitch_bytes_io(buffer, 0.1)
+        transformed_data = glitch_bytes_io(buffer, score)
         storage.add_resource(filename, transformed_data)
     extension = 'png'
     return filename, transformed_data, extension
