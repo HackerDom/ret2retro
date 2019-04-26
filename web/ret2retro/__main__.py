@@ -14,7 +14,7 @@ from ret2retro.middlewares import setup_error_middlewares
 
 
 CONSOLE_LOG_FORMAT = '%(asctime)-10s : %(levelname)-8s : %(message)s'
-CLIENT_MAX_SIZE = (1024 ** 2) * 5
+CLIENT_MAX_SIZE = (1024 ** 2) * 10
 
 
 def main():
