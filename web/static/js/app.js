@@ -1,7 +1,6 @@
 (function () {
     var dragNDrop = document.querySelector('.form-input-dnd');
     var fileInput = document.querySelector('[name=image]');
-    console.log(fileInput);
     var fileLabelInput = document.querySelector('.input_file_label');
 
     var addHighlight = function () {

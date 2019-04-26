@@ -21,6 +21,7 @@ def main():
 
     updater = Updater(BOT_TOKEN, request_kwargs=PROXY_SETTINGS)
     updater.dispatcher.add_handler(CommandHandler('start', start))
+    updater.dispatcher.add_handler(CommandHandler('hello', start))
     updater.dispatcher.add_handler(MessageHandler(Filters.photo, photo))
 
     logger.info('Bot start polling')
