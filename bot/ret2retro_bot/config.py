@@ -1,9 +1,11 @@
-BOT_TOKEN = '818076082:AAFNMVJ9xkUmy7317ytnOGxG7kpZfPbbG44'
+import os
+
+BOT_TOKEN = os.getenv('RET2RETRO_BOT_TOKEN')
 
 PROXY_SETTINGS = {
-    'proxy_url': 'socks5://proxy.ruc.tf:52817',
+    'proxy_url': os.getenv('RET2RETRO_TG_PROXY_URL'),
     'urllib3_proxy_kwargs': {
-        'username': 'ructf2019',
-        'password': 'KeSrKxdVQuhBw1xTIZG2',
+        'username': os.getenv('RET2RETRO_TG_PROXY_USERNAME'),
+        'password': os.getenv('RET2RETRO_TG_PROXY_PASSWORD'),
     }
 }
